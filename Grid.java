@@ -71,11 +71,12 @@ int [][] matrix; //hmm, any better name?
             case 2: return(false);
             case 3: this.matrix[x][y] = 1; return(true);
             case 4: this.matrix[x][y] = 2; return(true);
+            default: return(false);
         } 
     }
 
     public int get(int x, int y){
-        return(this.matrix[x][y];)
+        return(this.matrix[x][y]);
     }
 
     private void reset(int value){
