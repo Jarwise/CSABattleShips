@@ -60,7 +60,7 @@ public class PlayerGrid extends Grid {
                     continue;
                 }
             }
-            
+
             System.out.println("  Given coordinates: "+coor);
             if(coor.charAt(0) == 'h'){
                 for(int i = 0; i < ships[index]; i++){     // adding those yellow fields (ship range)
@@ -84,7 +84,7 @@ public class PlayerGrid extends Grid {
             index++;
 
         }
-        scany.close();
+        //scany.close();
     }
 
     public void image(){

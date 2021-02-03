@@ -88,8 +88,39 @@ int [][] matrix; //hmm, any better name?
     }
 
     public static void Image(Grid a, Grid b){
-        System.out.println(a.get(0, 0));
-        System.out.println(b.get(1, 1));
+        System.out.print(" Opponent's grid (attack here)   Your grid (cry here)\n\n  ");
+        char c = 'A';
+        for(int i = 0; i < a.getCol(); i++){    // letter of a column
+            System.out.print(" "+c);
+            c++;
+        }
+        System.out.println();
+        for(int i = 0; i < a.getRow(); i++){
+            if(i < 10) System.out.print(" ");
+            System.out.print(i);
+            for(int j = 0; j < a.getCol(); j++){
+                switch(a.get(i, j)){
+                    case 0: System.out.print(" ■"); break;  // empty not yet attacked field
+                    case 1: System.out.print(blue+" X"+reset); break;  // empty attacked field
+                    case 2: System.out.print(red+" #"+reset); break;  // "hit" attacked ship
+                    case 3: System.out.print(" ■"); break;  case 4: System.out.print(" ■"); break;
+                    default: System.out.print(" O"); break; // debug (the rest)
+                }
+            }
+            System.out.print("          ");
+            for(int j = 0; j < b.getCol(); j++){
+                switch(b.get(i, j)){
+                    case 0: System.out.print(" ■"); break;  // empty not yet attacked field
+                    case 1: System.out.print(red+" X"+reset); break;  // empty attacked field
+                    case 2: System.out.print(blue+" #"+reset); break;  // "hit" attacked ship (your)
+                    case 3: System.out.print(green+" ■"+reset); break;  // useless 
+                    case 4: System.out.print(blue+" ■"+reset); break;  // your ships (unattacked)
+                    default: System.out.print(" O"); break; // debug (the rest)
+                }
+            }
+            System.out.println();
+        }
+        System.out.println();
     }
 
     public static final String reset = "\u001B[0m";
