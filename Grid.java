@@ -57,6 +57,27 @@ int [][] matrix; //hmm, any better name?
         this.image();
     }
 
+    public int getCol(){   //getter methods
+        return(this.columns);
+    }
+    public int getRow(){
+        return(this.rows);
+    }
+
+    public Boolean set(int x, int y){  //setter method
+        switch(this.matrix[x][y]){
+            case 0: this.matrix[x][y] = 1; return(true);
+            case 1: return(false);
+            case 2: return(false);
+            case 3: this.matrix[x][y] = 1; return(true);
+            case 4: this.matrix[x][y] = 2; return(true);
+        } 
+    }
+
+    public int get(int x, int y){
+        return(this.matrix[x][y];)
+    }
+
     private void reset(int value){
         for(int i = 0; i < this.rows; i++){
             for(int j = 0; j < this.columns; j++){
@@ -64,6 +85,12 @@ int [][] matrix; //hmm, any better name?
             }
         }
     }
+
+    public static void Image(Grid a, Grid b){
+        System.out.println(a.get(0, 0));
+        System.out.println(b.get(1, 1));
+    }
+
     public static final String reset = "\u001B[0m";
     public static final String black = "\u001B[30m";
     public static final String red = "\u001B[31m";
@@ -72,5 +99,5 @@ int [][] matrix; //hmm, any better name?
     public static final String blue = "\u001B[34m";
     public static final String purple = "\u001B[35m";
     public static final String cyan = "\u001B[36m";
-    public static final String white = "\u001B[37m";
+    public static final String white = "\u001B[37m";  // I will delete ones we don't need
 }

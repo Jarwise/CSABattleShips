@@ -102,8 +102,8 @@ public class PlayerGrid extends Grid {
                 int x = super.matrix[i][j];
                 switch (x) {
                     case 0: System.out.print(" ■"); break;  // empty not yet attacked field
-                    case 1: System.out.print(red+" X"+reset); break;  // empty attcked field
-                    case 2: System.out.print(" #"); break;  // "hit" attaced ship
+                    case 1: System.out.print(red+" X"+reset); break;  // empty attacked field
+                    case 2: System.out.print(" #"); break;  // "hit" attacked ship
                     case 3: System.out.print(green+" ■"+reset); break; // ship range
                     case 4: System.out.print(blue+" ■"+reset); break; // your ship
                     default: System.out.print(" O"); break; // debug (the rest)
