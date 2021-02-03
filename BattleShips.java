@@ -1,7 +1,10 @@
 import java.util.Scanner;
+import java.util.Random;
   
 public class BattleShips {
        public static Scanner scany = new Scanner(System.in);
+       public static char[] alphabet = new char[]{'A','B','C','D','E','F','G','H','I','J',};
+       public static Random rand = new Random();
     public static void main(String[] args){
         PlayerGrid mygrid = new PlayerGrid(10, 10);
         System.out.println("\n  My grid: ");
@@ -21,7 +24,7 @@ public class BattleShips {
         String coor;
         while(!gameOver){
             if(turn){
-                System.out.println("  It is your turn, choose coordinates: (format - B1)");
+                System.out.println("  It is YOUR TURN, choose coordinates: (format - B1)");
                 coor = scany.next();
                 while(true){
                     if((coor.charAt(0)-'A') >= 0 && (coor.charAt(0)-'A') < mygrid.getCol() && (coor.charAt(1)-'0') >= 0  && (coor.charAt(1)-'0') < mygrid.getRow()){break;}
@@ -45,7 +48,29 @@ public class BattleShips {
                 continue;
             }
             if(!turn){
-                System.out.println("Samo's code here"); break;
+                int randomx = rand.nextInt(10);
+                int randomy = rand.nextInt(10);
+
+                while(true){
+                    if(randomy >= 0 && randomy < mygrid.getCol() && randomx >= 0  && randomx < mygrid.getRow()){break;}
+                    else{
+                        continue;
+                    }
+                }
+
+                if(mygrid.set(randomx, randomy)){
+                    System.out.println("It is the OPPONENT's turn...");
+                    try{
+                        Thread.sleep(3000);}
+                    catch(InterruptedException ex){
+                        Thread.currentThread().interrupt();}
+                    System.out.println("Your opponent attacked " + alphabet[randomy] + randomx + ".");
+                    Grid.Image(opgrid, mygrid);
+                    if(mygrid.get(randomx, randomy) == 2){System.out.println("******************* HIT!! ********************\n");}
+                    else{System.out.println("---------------- MISS -----------------\n"); turn = true;}
+                }
+                continue;
+
             }
         }
         scany.close();
