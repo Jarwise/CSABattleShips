@@ -1,6 +1,7 @@
 import java.util.Scanner;
-
+  
 public class BattleShips {
+       public static Scanner scany = new Scanner(System.in);
     public static void main(String[] args){
         PlayerGrid mygrid = new PlayerGrid(10, 10);
         System.out.println("\n  My grid: ");
@@ -20,11 +21,8 @@ public class BattleShips {
         String coor;
         while(!gameOver){
             if(turn){
-
                 System.out.println("  It is your turn, choose coordinates: (format - B1)");
-                Scanner scany = new Scanner(System.in);
                 coor = scany.next();
-                scany.close();
                 while(true){
                     if((coor.charAt(0)-'A') >= 0 && (coor.charAt(0)-'A') < mygrid.getCol() && (coor.charAt(1)-'0') >= 0  && (coor.charAt(1)-'0') < mygrid.getRow()){break;}
                     else{
@@ -50,7 +48,7 @@ public class BattleShips {
                 System.out.println("Samo's code here"); break;
             }
         }
-        //scany.close();
+        scany.close();
     }
 
 }

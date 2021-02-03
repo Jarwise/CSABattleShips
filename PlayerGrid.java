@@ -1,6 +1,8 @@
 import java.util.Scanner;
 
 public class PlayerGrid extends Grid {
+    public static Scanner scany = new Scanner(System.in);
+
     public PlayerGrid(int row, int col){
         super(row, col);
     }
@@ -10,7 +12,7 @@ public class PlayerGrid extends Grid {
         int[] ships = {5, 4, 3, 3, 2, 2};
         int index = 0;
         String coor;
-        Scanner scany = new Scanner(System.in);
+        //Scanner scany = new Scanner(System.in);
         while(index != ships.length){
             System.out.println("  Unplaced ships: ");
             for(int i = index; i < ships.length; i++){
