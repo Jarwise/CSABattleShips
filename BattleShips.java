@@ -48,25 +48,46 @@ public class BattleShips {
                 continue;
             }
             if(!turn){
-                int randomx = rand.nextInt(10);
-                int randomy = rand.nextInt(10);
-
+                int turnx = 0;
+                int turny = 0;
+                Boolean goodturn = false;
+                for(int i = 0; i < 10; i++){
+                    for(int j = 0; j < 10; j++){
+                        if((i+1 < 10 && mygrid.get(i+1,j) == 2) || (j+1 < 10 && mygrid.get(i,j+1) == 2) || (i-1 >= 0 && mygrid.get(i-1,j) == 2) || (j-1 >= 0 && mygrid.get(i,j-1) == 2)){
+                            if(mygrid.get(i,j) == 0 || mygrid.get(i,j) == 3 || mygrid.get(i,j) == 4){
+                                turnx = i;
+                                turny = j;
+                                goodturn = true;
+                            }
+                        }
+                        if(goodturn){
+                            break;
+                        }
+                    }
+                    if(goodturn){
+                        break;
+                    }
+                }
+                if(!goodturn){
+                    turnx = rand.nextInt(10);
+                    turny = rand.nextInt(10);
+                }
                 while(true){
-                    if(randomy >= 0 && randomy < mygrid.getCol() && randomx >= 0  && randomx < mygrid.getRow()){break;}
+                    if(turny >= 0 && turny < mygrid.getCol() && turnx >= 0  && turnx < mygrid.getRow()){break;}
                     else{
                         continue;
                     }
                 }
 
-                if(mygrid.set(randomx, randomy)){
+                if(mygrid.set(turnx, turny)){
                     System.out.println("It is the OPPONENT's turn...");
                     try{
                         Thread.sleep(3000);}
                     catch(InterruptedException ex){
                         Thread.currentThread().interrupt();}
-                    System.out.println("Your opponent attacked " + alphabet[randomy] + randomx + ".");
+                    System.out.println("Your opponent attacked " + alphabet[turny] + turnx + ".");
                     Grid.Image(opgrid, mygrid);
-                    if(mygrid.get(randomx, randomy) == 2){System.out.println("******************* HIT!! ********************\n");}
+                    if(mygrid.get(turnx, turny) == 2){System.out.println("******************* HIT!! ********************\n");}
                     else{System.out.println("---------------- MISS -----------------\n"); turn = true;}
                 }
                 continue;
