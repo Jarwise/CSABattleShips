@@ -17,12 +17,12 @@ int [][] matrix; //hmm, any better name?
             for(int j = 0; j < this.columns; j++){
                 int x = this.matrix[i][j];
                 switch (x) {
-                    case 0: System.out.print(" ■"); break;  // empty not yet attacked field
+                    case 0: System.out.print(black+" ■"+reset); break;  // empty not yet attacked field
                     case 1: System.out.print(" X"); break;  // empty attacked field
                     case 2: System.out.print(red+" ■"+reset); break;   // "hit" attacked ship
-                    case 3: System.out.print(yellow+" ■"+reset); break; // opponents range of the ship (invisible)
-                    case 4: System.out.print(green+" ■"+reset); break;   // opponents ships (invisible)
-                    default: System.out.print(blue+" O"+reset); break; // debug (the rest)
+                    case 3: System.out.print(black+" ■"+reset); break; // opponents range of the ship (invisible)
+                    case 4: System.out.print(black+" ■"+reset); break;   // opponents ships (invisible)
+                    default: System.out.print(" O"); break; // debug (the rest)
                 }
             }
             System.out.print("\n");
@@ -161,4 +161,5 @@ int [][] matrix; //hmm, any better name?
     public static final String green = "\u001B[32m";
     public static final String yellow = "\u001B[33m";
     public static final String blue = "\u001B[34m";
+    public static final String black = "\u001B[30m";
 }
