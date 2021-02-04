@@ -72,10 +72,10 @@ int [][] matrix; //hmm, any better name?
             case 3: this.matrix[x][y] = 1; return(true);
             case 4: this.matrix[x][y] = 2; 
                 int v = 0;
-                if(x-1 >= 0){if(this.matrix[x-1][y] == 3 || this.matrix[x-1][y] == 1){v--;}}
-                if(x+1 < this.rows){if(this.matrix[x+1][y] == 3 || this.matrix[x+1][y] == 1){v--;}}
-                if(y-1 >= 0){if(this.matrix[x][y-1] == 3 || this.matrix[x][y-1] == 1){v++;}}
-                if(y+1 < this.columns){if(this.matrix[x][y+1] == 3 || this.matrix[x][y+1] == 1){v++;}}
+                if(x-1 >= 0){if(this.matrix[x-1][y] == 3 || this.matrix[x-1][y] == 1){v--;}  if(this.matrix[x-1][y]==4 || this.matrix[x-1][y]==2){v+=10;}}
+                if(x+1 < this.rows){if(this.matrix[x+1][y] == 3 || this.matrix[x+1][y] == 1){v--;} if(this.matrix[x+1][y]==4 || this.matrix[x+1][y]==2){v+=10;} }
+                if(y-1 >= 0){if(this.matrix[x][y-1] == 3 || this.matrix[x][y-1] == 1){v++;} if(this.matrix[x][y-1]==4 ||this.matrix[x][y-1]==2){v-=10;} }
+                if(y+1 < this.columns){if(this.matrix[x][y+1] == 3 || this.matrix[x][y+1] == 1){v++;} if(this.matrix[x][y+1]==4 || this.matrix[x][y+1]==2){v-=10;} }
                 if(v < 0){  //horizontal
                     int i = 1; Boolean fully = true; while(fully){
                         if(y+i < this.columns){if(this.matrix[x][y+i] == 4){fully = false; break;} if(this.matrix[x][y+i]==3||this.matrix[x][y+i]==1){break;}} else{break;} i++;
