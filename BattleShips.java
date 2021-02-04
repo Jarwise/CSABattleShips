@@ -18,7 +18,8 @@ public class BattleShips {
         opgrid.setShips();
 
         System.out.println("\n\n  Let's play!!\n");
-        Grid.Image(opgrid, mygrid);
+        int scoreP = 0, scoreO = 0; // out of (5+4+3+3+2+2) = 19
+        Grid.Image(opgrid, mygrid, scoreP, scoreO);
         Boolean gameOver = false;
         Boolean turn = true; // true = your turn; false = opponent's turn
         String coor;
@@ -37,13 +38,13 @@ public class BattleShips {
                 int X = coor.charAt(1) - '0';
                 int Y = coor.charAt(0) - 'A';
                 if(opgrid.set(X, Y)){
-                    Grid.Image(opgrid, mygrid);
-                    if(opgrid.get(X, Y) == 2){System.out.println("******************* HIT!! ********************\n");}
+                    Grid.Image(opgrid, mygrid, scoreP, scoreO);
+                    if(opgrid.get(X, Y) == 2){System.out.println("******************* HIT!! ********************\n"); scoreP++;}
                     else{System.out.println("---------------- MISS -----------------\n"); turn = false;}
                 }
                 else{
                     System.out.println("  You have already attacked this field!");
-                    Grid.Image(opgrid, mygrid);
+                    Grid.Image(opgrid, mygrid, scoreP, scoreO);
                 }
                 continue;
             }
@@ -86,8 +87,8 @@ public class BattleShips {
                     catch(InterruptedException ex){
                         Thread.currentThread().interrupt();}
                     System.out.println("Your opponent attacked " + alphabet[turny] + turnx + ".");
-                    Grid.Image(opgrid, mygrid);
-                    if(mygrid.get(turnx, turny) == 2){System.out.println("******************* HIT!! ********************\n");}
+                    Grid.Image(opgrid, mygrid, scoreP, scoreO);
+                    if(mygrid.get(turnx, turny) == 2){System.out.println("******************* HIT!! ********************\n"); scoreO++;}
                     else{System.out.println("---------------- MISS -----------------\n"); turn = true;}
                 }
                 continue;

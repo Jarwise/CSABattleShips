@@ -87,7 +87,7 @@ int [][] matrix; //hmm, any better name?
         }
     }
 
-    public static void Image(Grid a, Grid b){
+    public static void Image(Grid a, Grid b, int scoreP, int scoreO){
         System.out.print(" Opponent's grid (attack here)   Your grid (cry here)\n\n  ");
         char c = 'A';
         for(int i = 0; i < a.getCol(); i++){    // letter of a column
@@ -120,6 +120,7 @@ int [][] matrix; //hmm, any better name?
             }
             System.out.println();
         }
+        System.out.println("SCORE:   Player  "+blue+scoreP+reset+":"+red+scoreO+reset+"  Bot \n");
         System.out.println();
     }
 
