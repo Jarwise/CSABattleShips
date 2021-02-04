@@ -18,16 +18,16 @@ public class BattleShips {
         opgrid.setShips();
 
         System.out.println("\n\n  Let's play!!\n");
-        int scoreP = 0, scoreO = 0; // out of (5+4+3+3+2+2) = 19
+        int scoreP = 0, scoreO = 0, win = 19; // out of (5+4+3+3+2+2) = 19
         Grid.Image(opgrid, mygrid, scoreP, scoreO);
         Boolean gameOver = false;
         Boolean turn = true; // true = your turn; false = opponent's turn
         String coor;
         while(!gameOver){
             if(turn){
-                System.out.println("  It is YOUR TURN, choose coordinates: (format - B1)");
-                coor = scany.next();
+                System.out.println("  It is YOUR TURN, choose coordinates: (format: B1)"); 
                 while(true){
+                    coor = scany.next();
                     if((coor.charAt(0)-'A') >= 0 && (coor.charAt(0)-'A') < mygrid.getCol() && (coor.charAt(1)-'0') >= 0  && (coor.charAt(1)-'0') < mygrid.getRow()){break;}
                     else{
                         System.out.println("I'm sorry it looks like you have entered incorrect data, try again");
@@ -38,9 +38,13 @@ public class BattleShips {
                 int X = coor.charAt(1) - '0';
                 int Y = coor.charAt(0) - 'A';
                 if(opgrid.set(X, Y)){
-                    Grid.Image(opgrid, mygrid, scoreP, scoreO);
-                    if(opgrid.get(X, Y) == 2){System.out.println("******************* HIT!! ********************\n"); scoreP++;}
-                    else{System.out.println("---------------- MISS -----------------\n"); turn = false;}
+                    if(opgrid.get(X, Y) == 2 || opgrid.get(X, Y) == 5){
+                        scoreP++; 
+                        Grid.Image(opgrid, mygrid, scoreP, scoreO); 
+                        System.out.println("******************* HIT!! ********************\n");
+                        if(scoreP == win){System.out.println("\n ################# GAME OVER ################\n -----------------YOU-WIN---------------"); gameOver = true;}
+                    }
+                    else{Grid.Image(opgrid, mygrid, scoreP, scoreO); System.out.println("---------------- MISS -----------------\n"); turn = false;}
                 }
                 else{
                     System.out.println("  You have already attacked this field!");
@@ -87,9 +91,13 @@ public class BattleShips {
                     catch(InterruptedException ex){
                         Thread.currentThread().interrupt();}
                     System.out.println("Your opponent attacked " + alphabet[turny] + turnx + ".");
-                    Grid.Image(opgrid, mygrid, scoreP, scoreO);
-                    if(mygrid.get(turnx, turny) == 2){System.out.println("******************* HIT!! ********************\n"); scoreO++;}
-                    else{System.out.println("---------------- MISS -----------------\n"); turn = true;}
+                    if(mygrid.get(turnx, turny) == 2 || opgrid.get(turnx, turny) == 5){
+                        scoreO++; 
+                        Grid.Image(opgrid, mygrid, scoreP, scoreO); 
+                        System.out.println("******************* HIT!! ********************\n");
+                        if(scoreO == win){System.out.println("\n ################# GAME OVER ################\n -----------------YOU-LOSE---------------"); gameOver = true;}
+                    }
+                    else{Grid.Image(opgrid, mygrid, scoreP, scoreO); System.out.println("---------------- MISS -----------------\n"); turn = true;}
                 }
                 continue;
 
