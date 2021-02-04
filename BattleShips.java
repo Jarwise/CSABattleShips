@@ -74,8 +74,10 @@ public class BattleShips {
                     }
                 }
                 if(!goodturn){
-                    turnx = rand.nextInt(10);
-                    turny = rand.nextInt(10);
+                    while(!(mygrid.get(turnx,turny) == 0 || mygrid.get(turnx,turny) == 3 || mygrid.get(turnx,turny) == 4)){
+                        turnx = rand.nextInt(10);
+                        turny = rand.nextInt(10);
+                    }
                 }
                 while(true){
                     if(turny >= 0 && turny < mygrid.getCol() && turnx >= 0  && turnx < mygrid.getRow()){break;}
