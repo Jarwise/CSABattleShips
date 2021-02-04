@@ -101,7 +101,7 @@ int [][] matrix; //hmm, any better name?
                     }
                 }
                 return(true);
-            default: return(false);
+            default: return(true);
         } 
     }
 
@@ -133,7 +133,7 @@ int [][] matrix; //hmm, any better name?
                     case 0: System.out.print(" ■"); break;  // empty not yet attacked field
                     case 1: System.out.print(blue+" X"+reset); break;  // empty attacked field
                     case 2: System.out.print(red+" #"+reset); break;  // "hit" attacked ship
-                    case 3: System.out.print(yellow+" ■"+reset); break;  case 4: System.out.print(" ■"); break;
+                    case 3: System.out.print(" ■"); break;  case 4: System.out.print(" ■"); break;
                     case 5: System.out.print(red+" ."+reset); break; // fully destroyed ship
                     default: System.out.print(" O"); break; // debug (the rest)
                 }

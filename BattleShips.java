@@ -91,7 +91,7 @@ public class BattleShips {
                     catch(InterruptedException ex){
                         Thread.currentThread().interrupt();}
                     System.out.println("Your opponent attacked " + alphabet[turny] + turnx + ".");
-                    if(mygrid.get(turnx, turny) == 2 || opgrid.get(turnx, turny) == 5){
+                    if(mygrid.get(turnx, turny) == 2 || mygrid.get(turnx, turny) == 5){
                         scoreO++; 
                         Grid.Image(opgrid, mygrid, scoreP, scoreO); 
                         System.out.println("******************* HIT!! ********************\n");
