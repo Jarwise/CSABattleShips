@@ -77,29 +77,27 @@ int [][] matrix; //hmm, any better name?
                 if(y-1 >= 0){if(this.matrix[x][y-1] == 3){v++;}}
                 if(y+1 < this.columns){if(this.matrix[x][y+1] == 3){v++;}}
                 if(v < 0){  //horizontal
-                    System.out.println(" IT IS HORIZONTAL");
                     int i = 1; Boolean fully = true; while(fully){
-                        if(y+i < this.columns){if(this.matrix[x][y+i] == 4){fully = false;} if(this.matrix[x][y+i] == 3){break;}} else{break;} i++;
+                        if(y+i < this.columns){if(this.matrix[x][y+i] == 4){fully = false; break;} if(this.matrix[x][y+i]==3||this.matrix[x][y+i]==1){break;}} else{break;} i++;
                     }
-                    System.out.println(" FOUND "+i+" BROKEN SHIPS TO ROGHT");
                     i = 1; while(fully){
-                        if(y-i >= 0){if(this.matrix[x][y-i] == 4){fully = false;} if(this.matrix[x][y-i] == 3){break;}} else{break;} i++;
+                        if(y-i >= 0){if(this.matrix[x][y-i] == 4){fully = false; break;} if(this.matrix[x][y-i]==3||this.matrix[x][y-i]==1){break;}} else{break;} i++;
                     } 
-                    System.out.println(" FOUND "+i+" BROKEN SHIPS TO LEFT");if(fully){this.matrix[x][y] = 5;
+                    if(fully){this.matrix[x][y] = 5;
                         System.out.println("IM CAHNGING TO 5S ATD"); // fully destroyed ship
-                        for(int j=1; j<6; j++){if(y+j>=this.columns){break;} if(this.matrix[x][y+j]==3){break;} if(this.matrix[x][y+j]==2||this.matrix[x][y+j]==5){this.matrix[x][y+j]=5;}}
-                        for(int j=1; j<6; j++){if(y-j<0){break;} if(this.matrix[x][y-j]==3){break;} if(this.matrix[x][y-j]==2||this.matrix[x][y-j]==5){this.matrix[x][y-j]=5;}} // fully destroyed ship
+                        for(int j=1; j<6; j++){if(y+j>=this.columns){break;} if(this.matrix[x][y+j]==3||this.matrix[x][y+j]==1){break;} if(this.matrix[x][y+j]==2||this.matrix[x][y+j]==5){this.matrix[x][y+j]=5;}}
+                        for(int j=1; j<6; j++){if(y-j<0){break;} if(this.matrix[x][y-j]==3||this.matrix[x][y-j]==1){break;} if(this.matrix[x][y-j]==2||this.matrix[x][y-j]==5){this.matrix[x][y-j]=5;}} // fully destroyed ship
                     }
                 }
                 if(v > 0){  //vertical
                     int i = 1; Boolean fully = true; while(fully){
-                        if(x+i < this.rows){if(this.matrix[x+i][y] == 4){fully = false;} if(this.matrix[x+i][y] == 3){break;}} else{break;} i++;
+                        if(x+i < this.rows){if(this.matrix[x+i][y] == 4){fully = false; break;} if(this.matrix[x+i][y]==3||this.matrix[x+i][y]==1){break;}} else{break;} i++;
                     }
                     i = 1; while(fully){
-                        if(x-i >= 0){if(this.matrix[x-i][y] == 4){fully = false;} if(this.matrix[x-i][y] == 3){break;}} else{break;} i++;
+                        if(x-i >= 0){if(this.matrix[x-i][y] == 4){fully = false; break;} if(this.matrix[x-i][y]==3||this.matrix[x-i][y]==1){break;}} else{break;} i++;
                     } if(fully){this.matrix[x][y] = 5; 
-                        for(int j=1; j<6; j++){if(x+j>=this.rows){break;} if(this.matrix[x+j][y]==3){break;} if(this.matrix[x+j][y]==2||this.matrix[x+j][y]==5){this.matrix[x+j][y]=5;}}
-                        for(int j=1; j<6; j++){if(x-j<0){break;} if(this.matrix[x-j][y]==3){break;} if(this.matrix[x-j][y]==2||this.matrix[x-j][y]==5){this.matrix[x-j][y]=5;}} // fully destroyed ship
+                        for(int j=1; j<6; j++){if(x+j>=this.rows){break;} if(this.matrix[x+j][y]==3||this.matrix[x+j][y]==1){break;} if(this.matrix[x+j][y]==2||this.matrix[x+j][y]==5){this.matrix[x+j][y]=5;}}
+                        for(int j=1; j<6; j++){if(x-j<0){break;} if(this.matrix[x-j][y]==3||this.matrix[x-j][y]==1){break;} if(this.matrix[x-j][y]==2||this.matrix[x-j][y]==5){this.matrix[x-j][y]=5;}} // fully destroyed ship
                     }
                 }
                 return(true);
