@@ -6,13 +6,23 @@ import javax.swing.*;
 public class Test {
     public static void main(String[] args){
         int a = 10, b = 10;
-        Grid grid = new Grid(a, b);
-        Grid gridB = new Grid(a, b);
+        Grid grid = new Grid(a, b, "JO");
+        Grid gridB = new Grid(a, b, "LO!");
         grid.setShips();
         gridB.setShips();
 
         JFrame frame = new JFrame();
         JFrame frameB = new JFrame();
+
+        JFrame textFrame = new JFrame();
+        JLabel text = new JLabel("Im saying something");
+        text.setHorizontalAlignment(SwingConstants.CENTER);
+        textFrame.add(text);
+        textFrame.setVisible(true);
+        textFrame.setSize(300, 300);
+        textFrame.setLocationRelativeTo(null);
+        textFrame.setLocation(500, 500);
+        //text.setBounds(50, 50, 100, 30);
 
         JButton[][] buttons = new JButton[a][b];
         JButton[][] buttonsB = new JButton[a][b];
