@@ -1,5 +1,3 @@
-
-
 public class Pair {
     int a, b;
     public Pair(){}

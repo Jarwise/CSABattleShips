@@ -16,7 +16,7 @@ public class BattleShips {
         shout.setLayout(new GridLayout(2, 1));
         shout.setTitle("What's happening");
         shout.setSize(200, 150);
-        shout.setLocation(450, 550);
+        shout.setLocation(400, 525);
         shout.setVisible(false);
 
         PlayerGrid mygrid = new PlayerGrid(10, 10, "Player's grid");
@@ -28,7 +28,7 @@ public class BattleShips {
         System.out.println("  His grid: "); opgrid.image(); System.out.println("BTW You are not supposed to see this ;)\n");
         System.out.println("  My grid: "); mygrid.image();
 
-        System.out.println("\n\n  Let's play!!\n");
+        System.out.println("\n  Let's play!!  \n");
         opgrid.visible(true);
         mygrid.move();
         mygrid.clean(); opgrid.clean();
@@ -38,9 +38,10 @@ public class BattleShips {
         Boolean turn = true; // true = your turn; false = opponent's turn
         mygrid.disableButtons(true);
         mygrid.onlyGrid();
+        shout.setVisible(true); 
         while(!gameOver){
             if(turn){
-                shout.setVisible(true); scream.setText("It is your turn");
+                scream.setText("It is your turn");
                 opgrid.disableButtons(false);
                 if(opgrid.setPressed()){
                     if(opgrid.get(opgrid.getLastCoordinatesX(), opgrid.getLastCoordinatesY()) == 2 || opgrid.get(opgrid.getLastCoordinatesX(), opgrid.getLastCoordinatesY()) == 5){
@@ -49,7 +50,7 @@ public class BattleShips {
                         hitmiss.setText("*** YOU HIT! ***");
                         if(scoreP == win){
                             scream.setText("################ GAME OVER ################"); hitmiss.setText("------- YOU WON -------");
-                            shout.setSize(500, 100); shout.setLocation(250, 550);  gameOver = true;}
+                            shout.setSize(500, 100); shout.setLocation(250, 525);  gameOver = true;}
                     }
                     else{hitmiss.setText("--- YOU MISSED ---"); turn = false; opgrid.disableButtons(true);}
                 }

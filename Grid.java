@@ -84,9 +84,10 @@ public static Boolean actionEnabled = true;
                     case 0: System.out.print(" ■"); break;  // empty not yet attacked field
                     case 1: System.out.print(" X"); break;  // empty attacked field
                     case 2: System.out.print(red+" ■"+reset); break;   // "hit" attacked ship
-                    case 3: System.out.print(green+" ■"+reset); break; // opponents range of the ship (invisible)
-                    case 4: System.out.print(blue+" ■"+reset); break;   // opponents ships (invisible)
-                    case 5: System.out.print(blue+" ■"+reset); break;
+                    case 3: System.out.print(green+" ■"+reset); break; // range of the ship
+                    case 4: System.out.print(blue+" ■"+reset); break;  // SHIP
+                    case 5: System.out.print(blue+" ■"+reset); break;  // fully destroyed SHIP
+                    case 6: System.out.print(green+" ■"+reset); break; // range around fully destroyed SHIP
                     default: System.out.print(" O"); break; // debug (the rest)
                 }
             }
@@ -137,6 +138,8 @@ public static Boolean actionEnabled = true;
             case 1: return(false);
             case 2: return(false);
             case 3: this.matrix[x][y] = 1; this.buttons[x][y].setBackground(Color.GRAY); this.buttons[x][y].setText("X"); return(true);
+            case 5: return(false);
+            case 6: this.matrix[x][y] = 1; this.buttons[x][y].setBackground(Color.GRAY); this.buttons[x][y].setText("X"); return(true);
             case 4: this.matrix[x][y] = 2; this.buttons[x][y].setBackground(Color.RED); this.buttons[x][y].setText("■");
                 int v = 0;
                 if(x-1 >= 0){if(this.matrix[x-1][y] == 3 || this.matrix[x-1][y] == 1){v--;}  if(this.matrix[x-1][y]==4 || this.matrix[x-1][y]==2){v+=10;}}
@@ -150,9 +153,9 @@ public static Boolean actionEnabled = true;
                     i = 1; while(fully){
                         if(y-i >= 0){if(this.matrix[x][y-i] == 4){fully = false; break;} if(this.matrix[x][y-i]==3||this.matrix[x][y-i]==1){break;}} else{break;} i++;
                     } 
-                    if(fully){this.matrix[x][y] = 5; this.buttons[x][y].setBackground(Color.PINK); this.buttons[x][y].setText("#");// fully destroyed ship
-                        for(int j=1; j<6; j++){if(y+j>=this.columns){break;} if(this.matrix[x][y+j]==3||this.matrix[x][y+j]==1){break;} if(this.matrix[x][y+j]==2||this.matrix[x][y+j]==5){this.matrix[x][y+j]=5; this.buttons[x][y+j].setBackground(Color.PINK); this.buttons[x][y+j].setText("#");}}
-                        for(int j=1; j<6; j++){if(y-j<0){break;} if(this.matrix[x][y-j]==3||this.matrix[x][y-j]==1){break;} if(this.matrix[x][y-j]==2||this.matrix[x][y-j]==5){this.matrix[x][y-j]=5; this.buttons[x][y-j].setBackground(Color.PINK); this.buttons[x][y-j].setText("#");}} // fully destroyed ship
+                    if(fully){this.pinky(x,y);
+                        for(int j=1; j<6; j++){if(y+j>=this.columns){break;} if(this.matrix[x][y+j]==3||this.matrix[x][y+j]==1){break;} if(this.matrix[x][y+j]==2||this.matrix[x][y+j]==5){this.pinky(x,y+j);}}
+                        for(int j=1; j<6; j++){if(y-j<0){break;} if(this.matrix[x][y-j]==3||this.matrix[x][y-j]==1){break;} if(this.matrix[x][y-j]==2||this.matrix[x][y-j]==5){this.pinky(x,y-j);}}
                     }
                 }
                 if(v > 0){  //vertical
@@ -162,9 +165,9 @@ public static Boolean actionEnabled = true;
                     i = 1; while(fully){
                         if(x-i >= 0){if(this.matrix[x-i][y] == 4){fully = false; break;} if(this.matrix[x-i][y]==3||this.matrix[x-i][y]==1){break;}} else{break;} i++;
                     }
-                    if(fully){this.matrix[x][y] = 5;  this.buttons[x][y].setBackground(Color.PINK); this.buttons[x][y].setText("#");
-                        for(int j=1; j<6; j++){if(x+j>=this.rows){break;} if(this.matrix[x+j][y]==3||this.matrix[x+j][y]==1){break;} if(this.matrix[x+j][y]==2||this.matrix[x+j][y]==5){this.matrix[x+j][y]=5; this.buttons[x+j][y].setBackground(Color.PINK); this.buttons[x+j][y].setText("#");}}
-                        for(int j=1; j<6; j++){if(x-j<0){break;} if(this.matrix[x-j][y]==3||this.matrix[x-j][y]==1){break;} if(this.matrix[x-j][y]==2||this.matrix[x-j][y]==5){this.matrix[x-j][y]=5; this.buttons[x-j][y].setBackground(Color.PINK); this.buttons[x-j][y].setText("#");}} // fully destroyed ship
+                    if(fully){this.pinky(x,y);
+                        for(int j=1; j<6; j++){if(x+j>=this.rows){break;} if(this.matrix[x+j][y]==3||this.matrix[x+j][y]==1){break;} if(this.matrix[x+j][y]==2||this.matrix[x+j][y]==5){this.pinky(x+j,y);}}
+                        for(int j=1; j<6; j++){if(x-j<0){break;} if(this.matrix[x-j][y]==3||this.matrix[x-j][y]==1){break;} if(this.matrix[x-j][y]==2||this.matrix[x-j][y]==5){this.pinky(x-j,y);}}
                     }
                 }
                 return(true);
@@ -202,6 +205,24 @@ public static Boolean actionEnabled = true;
                 this.matrix[i][j] = value;
             }
         }
+    }
+
+    public void pinky(int x, int y){  // fully destroyed ship
+        this.matrix[x][y] = 5; 
+        this.buttons[x][y].setBackground(Color.PINK); 
+        this.buttons[x][y].setText("#");
+        if(x+1 < this.rows){if(this.matrix[x+1][y] == 3){
+            this.matrix[x+1][y] = 6;
+        }}
+        if(x-1 >= 0){if(this.matrix[x-1][y] == 3){
+            this.matrix[x-1][y] = 6;
+        }}
+        if(y+1 < this.columns){if(this.matrix[x][y+1] == 3){
+            this.matrix[x][y+1] = 6;
+        }}
+        if(y-1 >= 0){if(this.matrix[x][y-1] == 3){
+            this.matrix[x][y-1] = 6;
+        }}
     }
 
     public static final String reset = "\u001B[0m";
