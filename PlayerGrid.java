@@ -40,7 +40,7 @@ public class PlayerGrid extends Grid {
                                 }
                             }
                         }
-                        if(super.buttons[i][j].getText().equals("v")){
+                        if(super.buttons[i][j].getText().equals("v") && super.matrix[i][j] % 10 == 0){
                             Boolean okey = true;
                             for(int a = 0; a < super.rows; a++){for(int b = 0; b < super.columns; b++){if(super.matrix[a][b] == 10){super.matrix[a][b] = 0; super.buttons[a][b].setText(""); super.buttons[a][b].setBackground(null);}}}
                             super.buttons[i][j].setText("V");
