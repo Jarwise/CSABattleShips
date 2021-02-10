@@ -101,6 +101,22 @@ public class BattleShips {
                     scream.setText("It's your Opponent's turn"); hitmiss.setText(" ");
                     //System.out.println("Your opponent attacked " + alphabet[turny] + turnx + ".");
                     if(mygrid.get(turnx, turny) == 2 || mygrid.get(turnx, turny) == 5){
+                        if((turnx+1 < 10 && mygrid.get(turnx+1,turny) == 2) || (turnx-1 >= 0 && mygrid.get(turnx-1,turny) == 2)){
+                            if(turny+1 < 10){
+                                mygrid.matrix[turnx][turny+1] = 6;
+                            }
+                            if(turny-1 >= 0){
+                                mygrid.matrix[turnx][turny-1] = 6;
+                            }
+                        }
+                        if((turny+1 < 10 && mygrid.get(turnx,turny+1) == 2) || (turny-1 >= 0 && mygrid.get(turnx,turny-1) == 2)){
+                            if(turnx+1 < 10){
+                                mygrid.matrix[turnx+1][turny] = 6;
+                            }
+                            if(turnx-1 >= 0){
+                                mygrid.matrix[turnx-1][turny] = 6;
+                            }
+                        }
                         scoreO++; 
                         opgrid.setScore(scoreO, scoreP);
                         hitmiss.setText("*** OPPONENT HIT! ***");
