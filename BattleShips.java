@@ -1,11 +1,8 @@
-import java.util.Scanner;
 import java.util.Random;
 import java.awt.*;  
 import javax.swing.*;
   
 public class BattleShips {
-       public static Scanner scany = new Scanner(System.in);
-       public static char[] alphabet = new char[]{'A','B','C','D','E','F','G','H','I','J',};
        public static Random rand = new Random();
     public static void main(String[] args){
 
@@ -28,10 +25,10 @@ public class BattleShips {
 
         mygrid.setShips();
         opgrid.setShips();
-        System.out.println("  His grid: "); opgrid.image();
+        System.out.println("  His grid: "); opgrid.image(); System.out.println("BTW You are not supposed to see this ;)\n");
         System.out.println("  My grid: "); mygrid.image();
 
-        //System.out.println("\n\n  Let's play!!\n");
+        System.out.println("\n\n  Let's play!!\n");
         opgrid.visible(true);
         mygrid.move();
         mygrid.clean(); opgrid.clean();
@@ -43,25 +40,29 @@ public class BattleShips {
         mygrid.onlyGrid();
         while(!gameOver){
             if(turn){
-                shout.setVisible(true); scream.setText("It is your turn\n");
+                shout.setVisible(true); scream.setText("It is your turn");
                 opgrid.disableButtons(false);
-                mygrid.turn();
                 if(opgrid.setPressed()){
                     if(opgrid.get(opgrid.getLastCoordinatesX(), opgrid.getLastCoordinatesY()) == 2 || opgrid.get(opgrid.getLastCoordinatesX(), opgrid.getLastCoordinatesY()) == 5){
                         scoreP++; 
                         mygrid.setScore(scoreO, scoreP); opgrid.setScore(scoreO, scoreP); 
-                        hitmiss.setText("*** HIT! ***");
+                        hitmiss.setText("*** YOU HIT! ***");
                         if(scoreP == win){
-                            scream.setText("################ GAME OVER ################"); hitmiss.setText("------- YOU WIN -------");
+                            scream.setText("################ GAME OVER ################"); hitmiss.setText("------- YOU WON -------");
                             shout.setSize(500, 100); shout.setLocation(250, 550);  gameOver = true;}
                     }
-                    else{hitmiss.setText("--- MISS ---"); turn = false; opgrid.disableButtons(true);}
+                    else{hitmiss.setText("--- YOU MISSED ---"); turn = false; opgrid.disableButtons(true);}
                 }
                 
                 continue;
             }
             if(!turn){
-                scream.setText("It's your Opponent's turn"); hitmiss.setText(" ");
+                scream.setText("It's your Opponent's turn"); 
+                try{
+                    Thread.sleep(3000);}
+                catch(InterruptedException ex){
+                    Thread.currentThread().interrupt();}
+                hitmiss.setText(" ");
                 int turnx = 0;
                 int turny = 0;
                 Boolean goodturn = false;
@@ -97,24 +98,19 @@ public class BattleShips {
 
                 if(mygrid.set(turnx, turny)){
                     scream.setText("It's your Opponent's turn"); hitmiss.setText(" ");
-                    try{
-                        Thread.sleep(3000);}
-                    catch(InterruptedException ex){
-                        Thread.currentThread().interrupt();}
-                    System.out.println("Your opponent attacked " + alphabet[turny] + turnx + ".");
+                    //System.out.println("Your opponent attacked " + alphabet[turny] + turnx + ".");
                     if(mygrid.get(turnx, turny) == 2 || mygrid.get(turnx, turny) == 5){
                         scoreO++; 
                         opgrid.setScore(scoreO, scoreP);
-                        hitmiss.setText("*** HIT! ***");
+                        hitmiss.setText("*** OPPONENT HIT! ***");
                         if(scoreO == win){scream.setText("################ GAME OVER ################"); hitmiss.setText("------- YOU LOSE -------");
                         gameOver = true;}
                     }
-                    else{opgrid.setScore(scoreO, scoreP); hitmiss.setText("*** HIT! ***"); turn = true;}
+                    else{opgrid.setScore(scoreO, scoreP); hitmiss.setText("--- OPPONENT MISSED ---"); turn = true;}
                 }
                 continue;
 
             }
         }
-        scany.close();
     }
 }

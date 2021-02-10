@@ -1,8 +1,6 @@
-import java.util.Scanner;
 import java.awt.*;
 
 public class PlayerGrid extends Grid {
-    public static Scanner scany = new Scanner(System.in);
 
     public PlayerGrid(int row, int col, String title){
         super(row, col, title);
@@ -81,32 +79,5 @@ public class PlayerGrid extends Grid {
             index++;
         }
         super.text.setText("All ships placed");
-    }
-
-    public void image(){
-        System.out.print("\n  ");
-        char c = 'A';
-        for(int i = 0; i < super.columns; i++){    // letter of a column
-            System.out.print(" "+c);
-            c++;
-        }
-        System.out.print("\n");
-        for(int i = 0; i < super.rows; i++){
-            if(i < 10) System.out.print(" ");
-            System.out.print(i);                      // number of a row
-            for(int j = 0; j < super.columns; j++){
-                int x = super.matrix[i][j];
-                switch (x) {
-                    case 0: System.out.print(" ■"); break;  // empty not yet attacked field
-                    case 1: System.out.print(red+" X"+reset); break;  // empty attacked field
-                    case 2: System.out.print(" #"); break;  // "hit" attacked ship
-                    case 3: System.out.print(green+" ■"+reset); break; // ship range
-                    case 4: System.out.print(blue+" ■"+reset); break; // your ship
-                    default: System.out.print(" O"); break; // debug (the rest)
-                }
-            }
-            System.out.print("\n");
-        }
-        System.out.print("\n");
     }
 }

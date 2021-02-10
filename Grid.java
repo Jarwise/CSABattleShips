@@ -75,19 +75,18 @@ public static Boolean actionEnabled = true;
 
     public void setScore(int opscore, int myscore){ this.text.setText("                                     SCORE:    Opponent   "+opscore+" : "+myscore+"   Player"); }
 
-    public void turn(){ this.text.setText("IT'S YOUR TURN!"); this.ok.setVisible(false); }
-
     public void image(){
         System.out.print("\n");
         for(int i = 0; i < this.rows; i++){
             for(int j = 0; j < this.columns; j++){
                 int x = this.matrix[i][j];
                 switch (x) {
-                    case 0: System.out.print(black+" ■"+reset); break;  // empty not yet attacked field
+                    case 0: System.out.print(" ■"); break;  // empty not yet attacked field
                     case 1: System.out.print(" X"); break;  // empty attacked field
                     case 2: System.out.print(red+" ■"+reset); break;   // "hit" attacked ship
-                    case 3: System.out.print(black+" ■"+reset); break; // opponents range of the ship (invisible)
-                    case 4: System.out.print(black+" ■"+reset); break;   // opponents ships (invisible)
+                    case 3: System.out.print(green+" ■"+reset); break; // opponents range of the ship (invisible)
+                    case 4: System.out.print(blue+" ■"+reset); break;   // opponents ships (invisible)
+                    case 5: System.out.print(blue+" ■"+reset); break;
                     default: System.out.print(" O"); break; // debug (the rest)
                 }
             }
@@ -97,7 +96,7 @@ public static Boolean actionEnabled = true;
     }
 
     public void setShips(){
-        int[] ships = {5, 4, 3, 3, 2, 2};
+        int[] ships = {5, 4, 3, 3, 2, 2};  // change list of the ships here :D
         int X, Y, V, H, index = 0;
         while(index != ships.length){
             X = (int)(Math.random()*this.rows);
@@ -205,49 +204,9 @@ public static Boolean actionEnabled = true;
         }
     }
 
-    public static void Image(Grid a, Grid b, int scoreP, int scoreO){
-        System.out.print(" Opponent's grid (attack here)   Your grid (cry here)\n\n  ");
-        char c = 'A';
-        for(int i = 0; i < a.getCol(); i++){    // letter of a column
-            System.out.print(" "+c);
-            c++;
-        }
-        System.out.println();
-        for(int i = 0; i < a.getRow(); i++){
-            if(i < 10) System.out.print(" ");
-            System.out.print(i);
-            for(int j = 0; j < a.getCol(); j++){
-                switch(a.get(i, j)){
-                    case 0: System.out.print(" ■"); break;  // empty not yet attacked field
-                    case 1: System.out.print(blue+" X"+reset); break;  // empty attacked field
-                    case 2: System.out.print(red+" #"+reset); break;  // "hit" attacked ship
-                    case 3: System.out.print(" ■"); break;  case 4: System.out.print(" ■"); break;
-                    case 5: System.out.print(red+" ."+reset); break; // fully destroyed ship
-                    default: System.out.print(" O"); break; // debug (the rest)
-                }
-            }
-            System.out.print("          ");
-            for(int j = 0; j < b.getCol(); j++){
-                switch(b.get(i, j)){
-                    case 0: System.out.print(" ■"); break;  // empty not yet attacked field
-                    case 1: System.out.print(red+" X"+reset); break;  // empty attacked field
-                    case 2: System.out.print(blue+" #"+reset); break;  // "hit" attacked ship (your)
-                    case 3: System.out.print(green+" ■"+reset); break;  // useless 
-                    case 4: System.out.print(blue+" ■"+reset); break;  // your ships (unattacked)
-                    case 5: System.out.print(blue+" ."+reset); break; // fully destroyed ship (your)
-                    default: System.out.print(" O"); break; // debug (the rest)
-                }
-            }
-            System.out.println();
-        }
-        System.out.println();
-        System.out.println("SCORE:            Player  "+blue+scoreP+reset+":"+red+scoreO+reset+"  Bot \n");
-    }
-
     public static final String reset = "\u001B[0m";
     public static final String red = "\u001B[31m";
     public static final String green = "\u001B[32m";
-    public static final String yellow = "\u001B[33m";
     public static final String blue = "\u001B[34m";
     public static final String black = "\u001B[30m";
 }
