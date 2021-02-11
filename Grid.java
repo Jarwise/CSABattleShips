@@ -7,12 +7,12 @@ import java.awt.event.ActionListener;
 public class Grid {
 int columns, rows;
 int [][] matrix; //hmm, any better name?
-JFrame frame = new JFrame();
+JFrame frame = new JFrame();     // constructing both value grid (matrix) and GUI grid (buttons)
 JLabel text;
 JButton[][] buttons;
 JButton ok = new JButton("ok");
 Pair exCo = new Pair(0, 0); // the last used coordinates
-public static Boolean actionEnabled = true;
+public Boolean actionEnabled = true;
 
     public Grid(int row, int col, String title){
         this.columns = col;
@@ -20,7 +20,7 @@ public static Boolean actionEnabled = true;
         this.matrix = new int[row][col];
         this.reset(0);
 
-        ActionListener actionListener = new ActionListener() {
+        ActionListener actionListener = new ActionListener() {      //action performed by pressing any of the grid buttons
             public void actionPerformed(ActionEvent event) {
                 if(actionEnabled){
                     JButton src = (JButton) event.getSource();
@@ -32,7 +32,7 @@ public static Boolean actionEnabled = true;
             }
         };
         
-        ActionListener okAction = new ActionListener() {
+        ActionListener okAction = new ActionListener() {           //action performed by clicking "ok" button
             public void actionPerformed(ActionEvent e){
                 JButton src = (JButton) e.getSource();
                 if(src.getText().equals("ok")){src.setText("__");}
@@ -41,7 +41,7 @@ public static Boolean actionEnabled = true;
         ok.addActionListener(okAction);
         JPanel buttonFrame = new JPanel();
         buttons = new JButton[row][col];
-        for(int i = 0; i < row; i++){
+        for(int i = 0; i < row; i++){                           // creating grid of buttons
             for(int j = 0; j < col; j++){
                 buttons[i][j] = new JButton("");
                 buttons[i][j].addActionListener(actionListener);
@@ -54,7 +54,7 @@ public static Boolean actionEnabled = true;
         JPanel info = new JPanel();
         info.add(text);
         info.add(ok);
-        info.setLayout(new BoxLayout(info, BoxLayout.PAGE_AXIS));
+        info.setLayout(new BoxLayout(info, BoxLayout.PAGE_AXIS));       //setting up GUI grid (frame)
         frame.add(buttonFrame, BorderLayout.CENTER);
         frame.add(info, BorderLayout.PAGE_END);
         frame.setTitle(title);
@@ -65,22 +65,23 @@ public static Boolean actionEnabled = true;
         frame.setLocation(500, 0);
     }
     
-    public void disableButtons(Boolean b){ Grid.actionEnabled = !b;};
+    public void disableButtons(Boolean b){ this.actionEnabled = !b;}; //disable buttons so you cannot click when it's not your turn
 
-    public void visible(Boolean b){ this.frame.setVisible(b); }
+    public void visible(Boolean b){ this.frame.setVisible(b); } // makes grid invisible or visible
 
-    public void onlyGrid(){ this.ok.setVisible(false); this.text.setVisible(false); this.frame.setSize(50*this.rows, 50*this.columns); }
+    public void onlyGrid(){ this.ok.setVisible(false); this.text.setVisible(false); this.frame.setSize(50*this.rows, 50*this.columns); } //deletes button and labels from a frame, only buttons grid is left
 
-    public void move(){ this.frame.setLocation(1, 0); }
+    public void move(){ this.frame.setLocation(1, 0); } //moves GUI (grid) into left upper corner of the screen
 
     public void setScore(int opscore, int myscore){ this.text.setText("                                     SCORE:    Opponent   "+opscore+" : "+myscore+"   Player"); }
+     // update score
 
-    public void image(){
+    public void image(){                // grafical representation of the grid in the console, <not used since the implementation of GUI>
         System.out.print("\n");
         for(int i = 0; i < this.rows; i++){
             for(int j = 0; j < this.columns; j++){
                 int x = this.matrix[i][j];
-                switch (x) {
+                switch (x) {  // DEFINITION OF FIELD STATES
                     case 0: System.out.print(" ■"); break;  // empty not yet attacked field
                     case 1: System.out.print(" X"); break;  // empty attacked field
                     case 2: System.out.print(red+" ■"+reset); break;   // "hit" attacked ship
@@ -96,7 +97,7 @@ public static Boolean actionEnabled = true;
         System.out.print("\n");
     }
 
-    public void setShips(){
+    public void setShips(){ // bot's generation of ships
         int[] ships = {5, 4, 3, 3, 2, 2};  // change list of the ships here :D
         int X, Y, V, H, index = 0;
         while(index != ships.length){
@@ -123,16 +124,16 @@ public static Boolean actionEnabled = true;
         //this.image();
     }
 
-    public int getCol(){ return(this.columns); }  //getter methods
+    public int getCol(){ return(this.columns); }  //getter methods for columns and rows
         
     public int getRow(){ return(this.rows); }
 
-    public int getLastCoordinatesX(){ return(this.exCo.a()); }
+    public int getLastCoordinatesX(){ return(this.exCo.a()); } //getter for the last pressed coordinates
     
     public int getLastCoordinatesY(){ return(this.exCo.b()); }
 
-    public Boolean set(int x, int y){  //setter method
-        exCo.set(x, y);
+    public Boolean set(int x, int y){  //setter method for clicking on any button - changin state of the field
+        exCo.set(x, y);                //returns true if you can click on the field, false if it has already been pressed
         switch(this.matrix[x][y]){
             case 0: this.matrix[x][y] = 1; this.buttons[x][y].setBackground(Color.GRAY); this.buttons[x][y].setText("X"); return(true);
             case 1: return(false);
@@ -175,11 +176,9 @@ public static Boolean actionEnabled = true;
         } 
     }
 
-    public int get(int x, int y){
-        return(this.matrix[x][y]);
-    }
+    public int get(int x, int y){ return(this.matrix[x][y]); } // getter for value of a singe field
 
-    public Boolean setPressed(){
+    public Boolean setPressed(){   // pressing a button - calls set method
         for(int i = 0; i < this.rows; i++){
             for(int j = 0; j < this.columns; j++){
                 if(this.buttons[i][j].getText().equals("x")){
@@ -191,7 +190,7 @@ public static Boolean actionEnabled = true;
         return(false);
     }
 
-    public void clean(){
+    public void clean(){  // clears all the buttons <not the values>
         for(int i = 0; i < this.rows; i++){
             for(int j = 0; j < this.columns; j++){
                 this.buttons[i][j].setText("");
@@ -199,7 +198,7 @@ public static Boolean actionEnabled = true;
         }
     }
 
-    private void reset(int value){
+    private void reset(int value){  // sets all the values to <value>
         for(int i = 0; i < this.rows; i++){
             for(int j = 0; j < this.columns; j++){
                 this.matrix[i][j] = value;
@@ -208,7 +207,7 @@ public static Boolean actionEnabled = true;
     }
 
     public void pinky(int x, int y){  // fully destroyed ship
-        this.matrix[x][y] = 5; 
+        this.matrix[x][y] = 5;        // if ship is fully destroyer, this method is called
         this.buttons[x][y].setBackground(Color.PINK); 
         this.buttons[x][y].setText("#");
         if(x+1 < this.rows){if(this.matrix[x+1][y] == 3){
@@ -225,7 +224,7 @@ public static Boolean actionEnabled = true;
         }}
     }
 
-    public static final String reset = "\u001B[0m";
+    public static final String reset = "\u001B[0m"; // colors used in the console version of the game <not used anymore>
     public static final String red = "\u001B[31m";
     public static final String green = "\u001B[32m";
     public static final String blue = "\u001B[34m";

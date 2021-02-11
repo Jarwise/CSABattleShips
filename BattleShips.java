@@ -9,7 +9,7 @@ public class BattleShips {
         JLabel scream = new JLabel(" ");
         JLabel hitmiss = new JLabel(" ");
         scream.setHorizontalAlignment(SwingConstants.CENTER);
-        hitmiss.setHorizontalAlignment(SwingConstants.CENTER);
+        hitmiss.setHorizontalAlignment(SwingConstants.CENTER);   // info text field
         shout.add(scream);
         shout.add(hitmiss);
         shout.setLayout(new GridLayout(2, 1));
@@ -18,12 +18,12 @@ public class BattleShips {
         shout.setLocation(400, 525);
         shout.setVisible(false);
 
-        PlayerGrid mygrid = new PlayerGrid(10, 10, "Player's grid");
+        PlayerGrid mygrid = new PlayerGrid(10, 10, "Player's grid");      // your grid
         Grid opgrid = new Grid(10, 10, "Opponent's grid (attack here)");  // opponent's grid
         mygrid.visible(true);
 
         mygrid.setShips();
-        opgrid.setShips();
+        opgrid.setShips();                                                  // setting ships (both players)
         System.out.println("  His grid: "); opgrid.image(); System.out.println("BTW You are not supposed to see this ;)\n");
         System.out.println("  My grid: "); mygrid.image();
 
@@ -38,7 +38,7 @@ public class BattleShips {
         mygrid.disableButtons(true);
         mygrid.onlyGrid();
         shout.setVisible(true); 
-        while(!gameOver){
+        while(!gameOver){           // the actual game - turn(you); !turn(bot)
             if(turn){
                 scream.setText("It is your turn");
                 opgrid.disableButtons(false);
@@ -98,7 +98,6 @@ public class BattleShips {
 
                 if(mygrid.set(turnx, turny)){
                     scream.setText("It's your Opponent's turn"); hitmiss.setText(" ");
-                    //System.out.println("Your opponent attacked " + alphabet[turny] + turnx + ".");
                     if(mygrid.get(turnx, turny) == 2 || mygrid.get(turnx, turny) == 5){
                         if((turnx+1 < mygrid.getRow() && mygrid.get(turnx+1,turny) == 2) || (turnx-1 >= 0 && mygrid.get(turnx-1,turny) == 2)){
                             if(turny+1 < mygrid.getCol()){

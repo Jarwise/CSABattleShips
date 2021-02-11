@@ -1,6 +1,6 @@
 public class Pair {
     int a, b;
-    public Pair(){}
+    public Pair(){}         // this class is only a simpler implementation of the Pair<int, int>
     public Pair(int a, int b){
         this.a = a;
         this.b = b;

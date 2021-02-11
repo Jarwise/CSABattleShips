@@ -2,12 +2,12 @@ import java.awt.*;
 
 public class PlayerGrid extends Grid {
 
-    public PlayerGrid(int row, int col, String title){
+    public PlayerGrid(int row, int col, String title){  // inherited constructor from the Grid.java
         super(row, col, title);
     }
 
-    public void setShips(){
-        int[] ships = {5, 4, 3, 3, 2, 2};
+    public void setShips(){  // manual setting of player's ship at the start of the game
+        int[] ships = {5, 4, 3, 3, 2, 2}; // change list of ships here :D
         int index = 0;
         String label;
         while(index != ships.length){
