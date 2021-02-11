@@ -3,9 +3,8 @@ import java.awt.*;
 import javax.swing.*;
   
 public class BattleShips {
-       public static Random rand = new Random();
+    public static Random rand = new Random();
     public static void main(String[] args){
-
         JFrame shout = new JFrame();
         JLabel scream = new JLabel(" ");
         JLabel hitmiss = new JLabel(" ");
@@ -101,16 +100,16 @@ public class BattleShips {
                     scream.setText("It's your Opponent's turn"); hitmiss.setText(" ");
                     //System.out.println("Your opponent attacked " + alphabet[turny] + turnx + ".");
                     if(mygrid.get(turnx, turny) == 2 || mygrid.get(turnx, turny) == 5){
-                        if((turnx+1 < 10 && mygrid.get(turnx+1,turny) == 2) || (turnx-1 >= 0 && mygrid.get(turnx-1,turny) == 2)){
-                            if(turny+1 < 10){
+                        if((turnx+1 < mygrid.getRow() && mygrid.get(turnx+1,turny) == 2) || (turnx-1 >= 0 && mygrid.get(turnx-1,turny) == 2)){
+                            if(turny+1 < mygrid.getCol()){
                                 mygrid.matrix[turnx][turny+1] = 6;
                             }
                             if(turny-1 >= 0){
                                 mygrid.matrix[turnx][turny-1] = 6;
                             }
                         }
-                        if((turny+1 < 10 && mygrid.get(turnx,turny+1) == 2) || (turny-1 >= 0 && mygrid.get(turnx,turny-1) == 2)){
-                            if(turnx+1 < 10){
+                        if((turny+1 < mygrid.getCol() && mygrid.get(turnx,turny+1) == 2) || (turny-1 >= 0 && mygrid.get(turnx,turny-1) == 2)){
+                            if(turnx+1 < mygrid.getRow()){
                                 mygrid.matrix[turnx+1][turny] = 6;
                             }
                             if(turnx-1 >= 0){
