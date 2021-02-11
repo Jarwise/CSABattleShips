@@ -8,4 +8,6 @@ You start the game by placing your ships into the grid (for now the set of ships
 
 When you are done with placing your ships you will begin to see two grids every iteration - opponent's grid, which will be empty at this point and your task is to try to find all the enemy ships in this one, and your grid, where your opponent tries to shoot your ships and you can see its progress. Two 'players' are taking turns with an exception of when someone gets an opponent's ship, then this player gets an extra turn. The point of the game is to find all of the opponent's ships the first to win.
 
+![alt text](https://github.com/Jarwise/CSABattleShips/blob/main/game.png?raw=true)
+
 Size of the grids is easily adjustable at the start of BattleShips.java file.
