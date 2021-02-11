@@ -8,11 +8,12 @@ You start the game by placing your ships into the grid (for now the set of ships
 
 ![alt text](https://github.com/Jarwise/CSABattleShips/blob/main/setships.png?raw=true)
 
-When you are done with placing your ships you will begin to see two grids - your opponent's, which will be empty at this point and your task is to try to find all the enemy ships, and your grid, where your opponent tries to shoot your ships down and you can see its progress and at the bottom you can find the info-text field which gives you info of whos turn it is. Two 'players' are taking turns with an exception of when someone gets a "HIT" on an opponent's ship, then this player gets an extra turn. The point of the game is to find all of the opponent's ships, the first one to do si wins.
+When you are done with placing your ships you will begin to see two grids - your opponent's, which will be empty at this point and your task is to try to find all the enemy ships, and your grid, where your opponent tries to shoot your ships down and you can see his progress.  Two 'players' are taking turns with an exception of when someone gets a "HIT" on an opponent's ship, then this player gets an extra turn. The point of the game is to find all of the opponent's ships, the first one to do si wins. At the bottom you can find the info-text field which gives you info of whos turn it is, also it is good to note that shot shipsegment is represented by a red field, when the whole ship is taken down it turns pink, therefore you know that no other ship segments can be located around.
 
 ![alt text](https://github.com/Jarwise/CSABattleShips/blob/main/game.png?raw=true)
 
-Size of the grids is easily adjustable at the start of BattleShips.java file.
+Size of the grids is easily adjustable at the start of BattleShips.java file.\
+Also the sets of ships can be quickly change in the setShips() methods in Grid.java and PlayerGrid.java - you can even chose to give player's different set of ships if you want to make the game easier or more difficult. ;)
 
 TEAM:\
 Maťo - user inteface and implementation of the grids\
