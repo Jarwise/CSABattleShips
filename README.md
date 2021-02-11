@@ -24,3 +24,4 @@ The code is divider only into three main parts:
  - Grid.java - class for both grids and all the methods for the grid
  - PlayerGrid.java - subclass extends Grid.java and add methods specific for players's grid, 
    like manual setting ships and previously also picturing player's grid differently
+ - Pair.java - only a simler implementation of Pair<int, int>
