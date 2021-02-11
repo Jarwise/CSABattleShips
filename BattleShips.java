@@ -59,7 +59,7 @@ public class BattleShips {
             if(!turn){
                 scream.setText("It's your Opponent's turn"); 
                 try{
-                    Thread.sleep(3000);}
+                    Thread.sleep(2000);}
                 catch(InterruptedException ex){
                     Thread.currentThread().interrupt();}
                 hitmiss.setText(" ");
@@ -120,7 +120,7 @@ public class BattleShips {
                         opgrid.setScore(scoreO, scoreP);
                         hitmiss.setText("*** OPPONENT HIT! ***");
                         if(scoreO == win){scream.setText("################ GAME OVER ################"); hitmiss.setText("------- YOU LOSE -------");
-                        gameOver = true;}
+                        shout.setSize(500, 100); shout.setLocation(250, 525); gameOver = true;}
                     }
                     else{opgrid.setScore(scoreO, scoreP); hitmiss.setText("--- OPPONENT MISSED ---"); turn = true;}
                 }
